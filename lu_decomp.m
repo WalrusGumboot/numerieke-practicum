@@ -10,22 +10,9 @@ U = zeros(n);
 
 
 for i = 1:n
-    % eerste scamversie met veel for loops
-    for k = i:n
-        tmp = 0;
-        for j = 1:i-1
-            tmp = tmp + L(i, j) * U(j, k);
-        end
-        U(i, k) = A(i, k) - tmp;
-    end
-
-    for k = i+1:n
-        tmp = 0;
-        for j = 1:i-1
-            tmp = tmp + L(k, j) * U(j, i);
-        end
-        L(k, i) = (A(k, i) - tmp) / U(i, i);
-    end
+    product = L * U;
+    U(i, i:end) = A(i, i:end) - product(i, i:end);
+    L(i+1:end, i) = ( A(i+1:end, i) - product(i+1:end, i) ) / U(i, i);
 end
 
 end

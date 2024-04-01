@@ -27,7 +27,10 @@ A = L * U;
 
 tolerantie = 1e-12;
 
+% equivalent: assert(all(ismembertol(L, test_L, tolerantie) == 1, [1 2])
 assert(isequal(ones(n), ismembertol(L, test_L, tolerantie)));
 assert(isequal(ones(n), ismembertol(U, test_U, tolerantie)));
+
+fprintf('Test OK\n')
 
 end
