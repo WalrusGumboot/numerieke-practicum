@@ -3,6 +3,8 @@ function [L, U] = lu_decomp(A)
 % L: een onderdriehoeksmatrix met diagonaalelementen gelijk aan 1
 % U: een bovendriehoeksmatrix
 
+assert(det(A) ~= 0, "Matrix is niet inverteerbaar.")
+
 n = length(A);
 
 L = eye(n);
