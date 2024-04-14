@@ -211,37 +211,25 @@
     ><line y2="249" style="fill:none;" x1="74" x2="74" y1="395"
       /><line y2="249" style="fill:none;" x1="516" x2="516" y1="395"
       /><line y2="395" style="fill:none;" x1="74" x2="78.42" y1="395"
-      /><line y2="358.5" style="fill:none;" x1="74" x2="78.42" y1="358.5"
       /><line y2="322" style="fill:none;" x1="74" x2="78.42" y1="322"
-      /><line y2="285.5" style="fill:none;" x1="74" x2="78.42" y1="285.5"
       /><line y2="249" style="fill:none;" x1="74" x2="78.42" y1="249"
       /><line y2="395" style="fill:none;" x1="516" x2="511.58" y1="395"
-      /><line y2="358.5" style="fill:none;" x1="516" x2="511.58" y1="358.5"
       /><line y2="322" style="fill:none;" x1="516" x2="511.58" y1="322"
-      /><line y2="285.5" style="fill:none;" x1="516" x2="511.58" y1="285.5"
       /><line y2="249" style="fill:none;" x1="516" x2="511.58" y1="249"
     /></g
     ><g transform="translate(69.4667,395)" style="font-size:12.6667px; fill:rgb(38,38,38); text-rendering:geometricPrecision; image-rendering:optimizeQuality; color-rendering:optimizeQuality; font-family:'SansSerif'; stroke:rgb(38,38,38); color-interpolation:linearRGB;"
     ><text x="-8" xml:space="preserve" y="5" style="stroke:none;"
       >0</text
     ></g
-    ><g transform="translate(69.4667,358.5)" style="font-size:12.6667px; fill:rgb(38,38,38); text-rendering:geometricPrecision; image-rendering:optimizeQuality; color-rendering:optimizeQuality; font-family:'SansSerif'; stroke:rgb(38,38,38); color-interpolation:linearRGB;"
-    ><text x="-26" xml:space="preserve" y="5" style="stroke:none;"
-      >0.01</text
-    ></g
     ><g transform="translate(69.4667,322)" style="font-size:12.6667px; fill:rgb(38,38,38); text-rendering:geometricPrecision; image-rendering:optimizeQuality; color-rendering:optimizeQuality; font-family:'SansSerif'; stroke:rgb(38,38,38); color-interpolation:linearRGB;"
-    ><text x="-26" xml:space="preserve" y="5" style="stroke:none;"
-      >0.02</text
-    ></g
-    ><g transform="translate(69.4667,285.5)" style="font-size:12.6667px; fill:rgb(38,38,38); text-rendering:geometricPrecision; image-rendering:optimizeQuality; color-rendering:optimizeQuality; font-family:'SansSerif'; stroke:rgb(38,38,38); color-interpolation:linearRGB;"
-    ><text x="-26" xml:space="preserve" y="5" style="stroke:none;"
-      >0.03</text
+    ><text x="-33" xml:space="preserve" y="5" style="stroke:none;"
+      >0.005</text
     ></g
     ><g transform="translate(69.4667,249)" style="font-size:12.6667px; fill:rgb(38,38,38); text-rendering:geometricPrecision; image-rendering:optimizeQuality; color-rendering:optimizeQuality; font-family:'SansSerif'; stroke:rgb(38,38,38); color-interpolation:linearRGB;"
     ><text x="-26" xml:space="preserve" y="5" style="stroke:none;"
-      >0.04</text
+      >0.01</text
     ></g
-    ><g transform="translate(40.1333,321.9999) rotate(-90)" style="font-size:13.9333px; fill:rgb(38,38,38); text-rendering:geometricPrecision; image-rendering:optimizeQuality; color-rendering:optimizeQuality; font-family:'SansSerif'; stroke:rgb(38,38,38); color-interpolation:linearRGB;"
+    ><g transform="translate(33.1333,321.9999) rotate(-90)" style="font-size:13.9333px; fill:rgb(38,38,38); text-rendering:geometricPrecision; image-rendering:optimizeQuality; color-rendering:optimizeQuality; font-family:'SansSerif'; stroke:rgb(38,38,38); color-interpolation:linearRGB;"
     ><text x="-39" xml:space="preserve" y="-5" style="stroke:none;"
       >tijdsduur (s)</text
     ></g
@@ -250,7 +238,7 @@
       >PQ-factorisatie</text
     ></g
     ><g style="stroke-linecap:butt; fill:red; text-rendering:geometricPrecision; image-rendering:optimizeQuality; color-rendering:optimizeQuality; stroke-linejoin:round; stroke:red; color-interpolation:linearRGB; stroke-width:0.6667;"
-    ><path d="M74 385.7227 L110.8333 372.9974 L147.6667 371.0643 L184.5 367.3626 L221.3333 363.6473 L258.1667 351.7585 L295 340.5547 L331.8333 332.1906 L368.6667 322.381 L405.5 307.3904 L442.3333 294.6486 L479.1667 278.147 L516 263.3084" style="fill:none; fill-rule:evenodd;"
+    ><path d="M74 371.7545 L110.8333 363.464 L147.6667 354.1151 L184.5 345.6637 L221.3333 335.1081 L258.1667 324.676 L295 314.4151 L331.8333 304.3767 L368.6667 296.3528 L405.5 285.9293 L442.3333 275.7209 L479.1667 265.6444 L516 256.315" style="fill:none; fill-rule:evenodd;"
     /></g
   ></g
 ></svg

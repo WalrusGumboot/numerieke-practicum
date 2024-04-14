@@ -208,12 +208,14 @@ for i = 1:13
     fprintf("run met n = %d duurde %d seconden\n", length(U), tijden_LU(i));
 end
 %}
-tijden_QP = zeros(1, 13);
+
+runs = 150;
+tijden_PQ = zeros(1, 13);
 for i = 1:13
     L = all_L2{i};
     U = all_U2{i};
 
-    P = flip(eye(length(U)));
+    P = flip(speye(length(U)));
     Q = P; % zie bewijs bij oefening 15
 
     b = ones(length(U), 1);
@@ -230,9 +232,9 @@ for i = 1:13
         tijden(j) = toc;
     end
     
-    tijden_QP(i) = mean(tijden(2:end));
+    tijden_PQ(i) = mean(tijden(2:end));
 
-    fprintf("run met n = %d duurde %d seconden\n", length(U), tijden_QP(i));
+    fprintf("run met n = %d duurde %d seconden\n", length(U), tijden_PQ(i));
 end
 
 figure(1)
@@ -247,7 +249,7 @@ hold on
 
 subplot(2, 1, 2)
 
-plot((0:12)*500+1000, tijden_QP,'r')
+plot((0:12)*500+1000, tijden_PQ,'r')
 title("PQ-factorisatie")
 ylabel("tijdsduur (s)")
 xlabel("grootte van matrix")
