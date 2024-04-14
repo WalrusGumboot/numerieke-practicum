@@ -4,6 +4,6 @@ function y = solve_Ub_special( U, b)
 % b: het rechterlid
 % y: de oplossing van het stelsel Uy = b
 
-y = ones(3);
+y = ones(4);
 
 end
