@@ -225,16 +225,29 @@ for i = 1:13
     for j = 1:runs
         tic
         y = solve_Lb_special(L, Pb);
-        opl = solve_Ub_special(U, y);
-
-        opl = Q * 
+        z = solve_Ub_special(U, y);
+        opl = Q * z';
         tijden(j) = toc;
     end
     
-    tijden_A2(i) = mean(tijden(2:end));
-
-    fprintf("run met n = %d duurde %d seconden\n", length(U), tijden_A2(i));
-end
-
     tijden_QP(i) = mean(tijden(2:end));
+
+    fprintf("run met n = %d duurde %d seconden\n", length(U), tijden_QP(i));
 end
+
+figure(1)
+subplot(2, 1, 1)
+
+plot((0:12)*500+1000, tijden_LU,'b')
+title("LU-factorisatie") 
+ylabel("tijdsduur (s)")
+xlabel("grootte van matrix")
+
+hold on
+
+subplot(2, 1, 2)
+
+plot((0:12)*500+1000, tijden_QP,'r')
+title("PQ-factorisatie")
+ylabel("tijdsduur (s)")
+xlabel("grootte van matrix")

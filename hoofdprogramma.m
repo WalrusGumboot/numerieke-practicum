@@ -186,7 +186,7 @@ legend("zonder preconditionering", "met preconditionering");
 %% Opdracht 16
 
 % Algemene LU-decompositie
-
+%{
 tijden_LU = zeros(1, 13);
 for i = 1:13
     L = all_L1{i};
@@ -207,7 +207,7 @@ for i = 1:13
 
     fprintf("run met n = %d duurde %d seconden\n", length(U), tijden_LU(i));
 end
-
+%}
 tijden_QP = zeros(1, 13);
 for i = 1:13
     L = all_L2{i};
@@ -226,7 +226,7 @@ for i = 1:13
         tic
         y = solve_Lb_special(L, Pb);
         z = solve_Ub_special(U, y);
-        opl = Q * z;
+        opl = Q * z';
         tijden(j) = toc;
     end
     
@@ -234,3 +234,20 @@ for i = 1:13
 
     fprintf("run met n = %d duurde %d seconden\n", length(U), tijden_QP(i));
 end
+
+figure(1)
+subplot(2, 1, 1)
+
+plot((0:12)*500+1000, tijden_LU,'b')
+title("LU-factorisatie") 
+ylabel("tijdsduur (s)")
+xlabel("grootte van matrix")
+
+hold on
+
+subplot(2, 1, 2)
+
+plot((0:12)*500+1000, tijden_QP,'r')
+title("PQ-factorisatie")
+ylabel("tijdsduur (s)")
+xlabel("grootte van matrix")
