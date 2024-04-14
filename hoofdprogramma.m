@@ -54,13 +54,7 @@ fprintf('Opdracht 5: test OK\n')
 clear;
 n = 5;
 
-A_1 = speye(n) * 1.1;
-A_1(1, 2:end) = repmat(0.01, [n - 1 1]);
-A_1(2:end, 1) = repmat(0.01, [1 n - 1]);
-
-A_2 = speye(n) * 1.1;
-A_2(n, 1:n-1) = repmat(0.01, [n - 1 1]);
-A_2(1:n-1, n) = repmat(0.01, [1 n - 1]);
+[A_1, A_2] = genereer_A_matrices(5)
 
 [L_1, U_1] = lu_decomp(A_1);
 [L_2, U_2] = lu_decomp(A_2);
@@ -74,3 +68,14 @@ fprintf('L_1 bevat %d nullen\n', sum(L_1(:) == 0));
 fprintf('U_1 bevat %d nullen\n', sum(U_1(:) == 0));
 fprintf('L_2 bevat %d nullen\n', sum(L_2(:) == 0));
 fprintf('U_2 bevat %d nullen\n', sum(U_2(:) == 0));
+
+%% Opdracht 9
+
+% genereren van de LU-decomposities
+
+all_L1 = list
+
+for i = 1:12
+    n = 1000 + i * 500;
+    
+end

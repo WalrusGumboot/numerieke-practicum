@@ -186,3 +186,8 @@ Zo bekomen we $sum_(k = 1)^(n) (1 + 2(n - k)) = n^2 + n$ bewerkingen voor $U in 
 $L_1$ en $U_1$ bevatten ieder tien nullen ($ = 2n$) en is dus niet per se spaars te noemen. \
 $L_2$ en $U_2$ bevatten ieder zestien nullen ($ = (n - 1)(n - 2) + (n - 1) = (n - 1)^2$) en is dus volgens de conventie
 spaars te noemen.
+
+= Opdracht 8
+
+`solve_Ub_special` vereist $sum_(k = 1)^(n - 1) 3 = 3(n - 1)$ bewerkingen (één vermenigvuldiging, één aftrekking en één deling). In vergelijking met de implementatie uit opdracht 5 is dit verband lineair in plaats van kwadratisch.
+
