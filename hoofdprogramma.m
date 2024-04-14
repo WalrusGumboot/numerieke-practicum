@@ -54,15 +54,10 @@ fprintf('Opdracht 5: test OK\n')
 clear;
 n = 5;
 
-[A_1, A_2] = genereer_A_matrices(5)
+[A_1, A_2] = genereer_A_matrices(5);
 
 [L_1, U_1] = lu_decomp(A_1);
 [L_2, U_2] = lu_decomp(A_2);
-
-L_1
-U_1
-L_2
-U_2
 
 fprintf('L_1 bevat %d nullen\n', sum(L_1(:) == 0));
 fprintf('U_1 bevat %d nullen\n', sum(U_1(:) == 0));
@@ -163,3 +158,79 @@ plot((0:12)*500+1000, tijden_A2,'r')
 title("Spaarse variant")
 ylabel("tijdsduur (s)")
 xlabel("grootte van matrix")
+
+%% Opdracht 13
+[x0_1, x1_1, resvec0_1, resvec1_1] = laad_gmres_gegevens("matrix_B1.mat");
+[x0_2, x1_2, resvec0_2, resvec1_2] = laad_gmres_gegevens("matrix_B2.mat");
+
+figure(1);
+subplot(2, 1, 1);
+
+plot(resvec0_1, 'r');
+hold on;
+plot(resvec1_1, 'b');
+title("B_1");
+xlabel("iteratiestappen");
+legend("zonder preconditionering", "met preconditionering");
+
+
+subplot(2, 1, 2);
+
+plot(resvec0_2, 'r');
+hold on;
+plot(resvec1_2, 'b');
+title("B_2")
+xlabel("iteratiestappen");
+legend("zonder preconditionering", "met preconditionering");
+
+%% Opdracht 16
+
+% Algemene LU-decompositie
+
+tijden_LU = zeros(1, 13);
+for i = 1:13
+    L = all_L1{i};
+    U = all_U1{i};
+
+    b = ones(length(U), 1);
+
+    tijden = zeros(runs, 1);
+
+    for j = 1:runs
+        tic
+        y = solve_Lb(L, b);
+        opl = solve_Ub(U, y);
+        tijden(j) = toc;
+    end
+    
+    tijden_LU(i) = mean(tijden(2:end));
+
+    fprintf("run met n = %d duurde %d seconden\n", length(U), tijden_LU(i));
+end
+
+tijden_QP = zeros(1, 13);
+for i = 1:13
+    L = all_L2{i};
+    U = all_U2{i};
+
+    P = flip(eye(length(U)));
+    Q = P; % zie bewijs bij oefening 15
+
+    b = ones(length(U), 1);
+
+    Pb = P * b; % plumbum
+
+    tijden = zeros(runs, 1);
+
+    for j = 1:runs
+        tic
+        y = solve_Lb_special(L, Pb);
+        z = solve_Ub_special(U, y);
+        opl = Q * z;
+        tijden(j) = toc;
+    end
+    
+    tijden_QP(i) = mean(tijden(2:end));
+
+    fprintf("run met n = %d duurde %d seconden\n", length(U), tijden_QP(i));
+end

@@ -191,3 +191,50 @@ spaars te noemen.
 
 `solve_Ub_special` vereist $sum_(k = 1)^(n - 1) 3 = 3(n - 1)$ bewerkingen (één vermenigvuldiging, één aftrekking en één deling). In vergelijking met de implementatie uit opdracht 5 is dit verband lineair in plaats van kwadratisch.
 
+= Opdracht 9
+
+#figure(
+  image("figuur1.svg"),
+  caption: [#text("Onze bevindingen: spaarse matrices hebben hun nut") \ #text("#cool", fill: white)]
+)
+
+= Opdracht 11
+
+Aangezien de bovengrens op relatieve fout recht evenredig is met het conditiegetal van de matrix; cfr. paragraaf 5.5.3 uit de cursus.
+
+= Opdracht 12
+
+Als we beide leden met $M_1$ linksvermenigvuldigen en vervolgens de definitie van $y$ invullen in het linkerlid, bekomen we (gegeven dat $M_2 x = y$):
+
+$ M_1 M_1^(-1) A M_2^(-1) (M_2 x) &= M_1 M_1^(-1) b \ <=> A x &= b $
+
+= Opdracht 13
+
+De preconditionering zal $B_1$ niet helpen convergeren in `gmres`, en $B_2$ wel. Uit de #link("https://nl.mathworks.com/help/matlab/ref/gmres.html#f84-998579_sep_mw_021450b1-4be9-4d57-b903-c4a2d800c810", [tips over `gmres`]) halen we de informatie dat het conditiegetal van de matrix sterk samenhangt met het convergentiegedrag in `gmres`.
+
+Aangezien $B_1$ en $B_2$ in MATLAB als spaarse matrices opgeslagen zijn, gebruiken we `condest` om het conditiegetal te berekenen. Bovendien gebruiken we de $2$-norm. Voor $B_1$ geeft dit een waarde van `3.5481e+06`, voor $B_2$ verkrijgen we `135.9396`. Tja. De resultaten spreken voor zich, edelachtbare.
+
+Ook kunnen we de voorwaartse fout naar boven afschatten aan de hand van dezelfde formule die wij reeds uit paragraaf 5.5.3 haalden, namelijk dat $ (||Delta x||)/(||x||) <= kappa(A) (||r||)/(||b||). $  Zo bekomen we voor $B_1$ zonder preconditionering een bovengrens van $3.5481 dot 10^6 dot 51.2195/sqrt(600) approx 7.4193 dot 10^6$.
+Bemerk echter dat de incomplete LU-decompositie van $B_1$ nog steeds een conditiegetal van $3.5481 dot 10^6$ heeft.
+Wanneer we de incomplete LU-decompositie van $B_2$ echter bekijken heeft deze een conditiegetal van slechts 13.3248.
+
+#figure(
+  image("convergentie.svg"),
+  caption: [De convergentiesnelheden van $B_1$ en $B_2$ met en zonder preconditionering.]
+)
+
+= Opdracht 14
+
+Zij $n in NN$ een willekeurig getal, en zij $A_1$ en $A_2$ dan de resulterende matrices zoals we ze in opdracht 6 definieerden. Zij $P in RR^(n times n)$ de matrix met enen op de antidiagonaal en nullen op alle andere posities.
+We zoeken dan de matrix $Q$ opdat $P A_1 Q = A_2$.
+
+Bemerk dat linksvermenigvuldigen met $P$ het effect heeft van de matrix "over de horizontale as" te spiegelen: de eerste rij van $P A_1$ is gelijk aan de laatste rij van $A_1$; de tweede rij van $P A_1$ is gelijk aan de voorlaatste rij van $A_1$, enzovoort. We bemerken dat om van $P A_1$ naar $A_2$ te gaan, dus enkel nog "over de verticale as" gespiegeld moet worden: de eerste kolom van $P A_1$ moet gelijk worden aan de laatste kolom van $A_2$, de tweede kolom van $P A_1$ aan de voorlaatste van $A_2$, etcetera. Beschouw de matrix $P A_1$ als een eigen entiteit; noem deze bijvoorbeeld $B$.
+
+We zoeken dus $Q$ zodat $B Q = A_2$, waarbij $Q$ een "kolomspiegeling" bewerkstelligt. Neem nu het getransponeerde van beide leden. We bekomen dan $Q^T B^T = A_2^T$; waarbij $Q^T$ een "rijspiegeling" bewerkstelligt. Maar we hebben al een matrix die bij linksvermenigvuldiging rijen spiegelt, namelijk $P$. Dus geldt dat $Q^T = P$. Echter is $P$ per definitie symmetrisch, dus is $Q = P$. Hierbij is de algemene vorm van $Q$ gevonden.
+
+= Opdracht 15
+
+Gegeven dat $A_2 z = P b$, met $A_1 x = b$, kunnen we deze gelijkheid invullen om $A_2 z = P A_1 x$ te bekomen. Verder weten we dat $P A_1 Q = A_2$, dus herschrijven we de vorige gelijkheid als $P A_1 Q z = P A_1 x$. Door links te vermenigvuldigen met $P^(-1)$ en voorts met $A_1^(-1)$ bekomen we
+$ A_1^(-1) P^(-1) P A_1 Q z &= A_1^(-1) P^(-1) P A_1 x \ <=> Q z &= x $
+
+= Opdracht 16
