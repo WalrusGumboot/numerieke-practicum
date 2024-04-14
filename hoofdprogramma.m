@@ -108,7 +108,7 @@ for i = 1:13
 
     b = ones(length(U), 1);
 
-    tijden = zeros(length(U), 1);
+    tijden = zeros(runs, 1);
 
     for j = 1:runs
         tic
@@ -141,7 +141,7 @@ for i = 1:13
 
     b = ones(length(U), 1);
 
-    tijden = zeros(length(U), 1);
+    tijden = zeros(runs, 1);
 
     for j = 1:runs
         tic
