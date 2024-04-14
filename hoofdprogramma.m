@@ -72,31 +72,33 @@ fprintf('U_2 bevat %d nullen\n', sum(U_2(:) == 0));
 %% Opdracht 9
 
 % genereren van de LU-decomposities
+%{
+all_L1 = cell(13, 1);
+all_U1 = cell(13, 1);
+all_L2 = cell(13, 1);
+all_U2 = cell(13, 1);
 
-% all_L1 = cell(13, 1);
-% all_U1 = cell(13, 1);
-% all_L2 = cell(13, 1);
-% all_U2 = cell(13, 1);
-% 
-% for i = 0:12
-%     n = 1000 + i * 500;
-%     [A_1, A_2] = genereer_A_matrices(n);
-% 
-%     fprintf('A-matrices van grootte %d gegenereerd\n', n);
-% 
-%     [L_1, U_1] = lu(A_1);
-%     [L_2, U_2] = lu(A_2);
-% 
-%     fprintf('Matrices van grootte %d gegenereerd\n', n);
-% 
-%     all_L1{i + 1} = L_1;
-%     all_U1{i + 1} = U_1;
-% 
-%     all_L2{i + 1} = L_2;
-%     all_U2{i + 1} = U_2;
-% end
+for i = 0:12
+   n = 1000 + i * 500;
+   [A_1, A_2] = genereer_A_matrices(n);
 
-% load("decomposities.mat")
+   fprintf('A-matrices van grootte %d gegenereerd\n', n);
+
+    [L_1, U_1] = lu(A_1);
+    [L_2, U_2] = lu(A_2);
+
+    fprintf('Matrices van grootte %d gegenereerd\n', n);
+
+    all_L1{i + 1} = L_1;
+    all_U1{i + 1} = U_1;
+
+    all_L2{i + 1} = L_2;
+    all_U2{i + 1} = U_2;
+end
+%}
+
+save("decomposities.mat", "all_L1", "all_U1", "all_L2", "all_U2", "-v7.3")
+load("decomposities.mat")
 
 runs = 20;
 % oplossen van stelsels mbt A1

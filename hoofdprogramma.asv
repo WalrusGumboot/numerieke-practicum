@@ -73,32 +73,33 @@ fprintf('U_2 bevat %d nullen\n', sum(U_2(:) == 0));
 
 % genereren van de LU-decomposities
 
-% all_L1 = cell(13, 1);
-% all_U1 = cell(13, 1);
-% all_L2 = cell(13, 1);
-% all_U2 = cell(13, 1);
-% 
-% for i = 0:12
-%     n = 1000 + i * 500;
-%     [A_1, A_2] = genereer_A_matrices(n);
-% 
-%     fprintf('A-matrices van grootte %d gegenereerd\n', n);
-% 
-%     [L_1, U_1] = lu(A_1);
-%     [L_2, U_2] = lu(A_2);
-% 
-%     fprintf('Matrices van grootte %d gegenereerd\n', n);
-% 
-%     all_L1{i + 1} = L_1;
-%     all_U1{i + 1} = U_1;
-% 
-%     all_L2{i + 1} = L_2;
-%     all_U2{i + 1} = U_2;
-% end
+all_L1 = cell(13, 1);
+all_U1 = cell(13, 1);
+all_L2 = cell(13, 1);
+all_U2 = cell(13, 1);
 
-% load("decomposities.mat")
+for i = 0:12
+    n = 1000 + i * 500;
+    [A_1, A_2] = genereer_A_matrices(n);
 
-runs = 2;
+    fprintf('A-matrices van grootte %d gegenereerd\n', n);
+
+    [L_1, U_1] = lu(A_1);
+    [L_2, U_2] = lu(A_2);
+
+    fprintf('Matrices van grootte %d gegenereerd\n', n);
+
+    all_L1{i + 1} = L_1;
+    all_U1{i + 1} = U_1;
+
+    all_L2{i + 1} = L_2;
+    all_U2{i + 1} = U_2;
+end
+
+save("decomposities.mat", "all_L1", "all_U1", "all_L2", "all_U2", "-v7.3")
+load("decomposities.mat")
+
+runs = 20;
 % oplossen van stelsels mbt A1
 
 tijden_A1 = zeros(1, 13);
@@ -108,7 +109,7 @@ for i = 1:13
 
     b = ones(length(U), 1);
 
-    tijden = zeros(length(U), 1);
+    tijden = zeros(runs, 1);
 
     for j = 1:runs
         tic
@@ -123,7 +124,10 @@ for i = 1:13
 end
 
 figure(1)
+subplot(2, 1, 1)
+
 plot((0:12)*500+1000, tijden_A1,'b')
+title("Niet-spaarse variant") 
 ylabel("tijdsduur (s)")
 xlabel("grootte van matrix")
 
@@ -138,7 +142,7 @@ for i = 1:13
 
     b = ones(length(U), 1);
 
-    tijden = zeros(length(U), 1);
+    tijden = zeros(runs, 1);
 
     for j = 1:runs
         tic
@@ -152,6 +156,9 @@ for i = 1:13
     fprintf("run met n = %d duurde %d seconden\n", length(U), tijden_A2(i));
 end
 
+subplot(2, 1, 2)
+
 plot((0:12)*500+1000, tijden_A2,'r')
+title("Spaarse variant")
 ylabel("tijdsduur (s)")
 xlabel("grootte van matrix")
