@@ -98,7 +98,7 @@ fprintf('U_2 bevat %d nullen\n', sum(U_2(:) == 0));
 
 % load("decomposities.mat")
 
-runs = 20;
+runs = 2;
 % oplossen van stelsels mbt A1
 
 tijden_A1 = zeros(1, 13);
@@ -123,10 +123,7 @@ for i = 1:13
 end
 
 figure(1)
-subplot(2, 1, 1)
-
 plot((0:12)*500+1000, tijden_A1,'b')
-title("Niet-spaarse variant") 
 ylabel("tijdsduur (s)")
 xlabel("grootte van matrix")
 
@@ -155,9 +152,6 @@ for i = 1:13
     fprintf("run met n = %d duurde %d seconden\n", length(U), tijden_A2(i));
 end
 
-subplot(2, 1, 2)
-
 plot((0:12)*500+1000, tijden_A2,'r')
-title("Spaarse variant")
 ylabel("tijdsduur (s)")
 xlabel("grootte van matrix")
