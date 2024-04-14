@@ -99,8 +99,6 @@ Verder is het idee achter de oplossingsmethode identiek: omdat de matrices drieh
 
 De correctheid wordt hier niet formeel bewezen, maar aan de hand van een zgh. _nothing up my sleeve_-test case#footnote[hier is $U$ de getallen van één tot zes, $b_1$ de eerste drie kwadraten, $L$ de rij van Fibonacci en $b_2$ de eerste drie cijfers van $pi$] gemotiveerd.
 
-#rect(fill: red.lighten(80%), [*Hier klopt nog iets niet* want in het boek staat dat bovendriehoekige stelsels maar $n^2$ operaties nodig hebben en ik kom $n^2 + n$ uit])
-
 De kern van `solve_Lb` bestaat uit de volgende drie regels:
 
 ```matlab
@@ -114,12 +112,12 @@ welke we splitsen in
 ```matlab
 for k = 1:n
     y(k) = b(k);
-    y(k) = y(k) - L(k, 1:k) * y(1:k); % 1 aftrekking, k verm., k opt.
+    y(k) = y(k) - L(k, 1:k) * y(1:k); % 1 aftrekking, k verm., k - 1 opt.
     y(k) = y(k) / L(k, k);            % 1 deling
 end
 ```
 
-In totaal levert ons dit $sum_(k = 1)^(n) (2 + 2k) = n^2 + 3n$ bewerkingen voor $L in RR^(n times n)$.
+In totaal levert ons dit $sum_(k = 1)^(n) (2k + 1) = n^2$ bewerkingen voor $L in RR^(n times n)$.
 
 Voor `solve_Ub` gaan we analoog te werk:
 
@@ -134,12 +132,12 @@ wordt
 ```matlab
 for k = n:-1:1
     y(k) = b(k);
-    y(k) = y(k) - U(k, k+1:n) * y(k+1:n); % 1 aftrekking, n - k verm., n - k opt.
+    y(k) = y(k) - U(k, k+1:n) * y(k+1:n); % 1 aftrekking, n - k verm., n - k + 1 opt.
     y(k) = y(k) / U(k, k);                % 1 deling
 end
 ```
 
-Zo bekomen we $sum_(k = 1)^(n) (2 + 2(n - k)) = n^2 + n$ bewerkingen voor $U in RR^(n times n)$.
+Zo bekomen we $sum_(k = 1)^(n) (1 + 2(n - k)) = n^2 + n$ bewerkingen voor $U in RR^(n times n)$.
 
 = Opdracht 6
 
