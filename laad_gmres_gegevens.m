@@ -7,4 +7,7 @@ b = ones(length(A), 1);
 [L, U] = incompl_lu_decomp(A);
 [y_1,  ~, ~, ~, resvec1] = gmres(@(x) A * (solve_Ub(U, solve_Lb(L, x))), b);
 x1 = solve_Ub(U, solve_Lb(L, y_1));
+M = L*U;
+cond(A)
+cond(A*M^(-1))
 end

@@ -166,21 +166,23 @@ xlabel("grootte van matrix")
 figure(1);
 subplot(2, 1, 1);
 
-plot(resvec0_1, 'r');
+semilogy(resvec0_1, 'r');
 hold on;
-plot(resvec1_1, 'b');
+semilogy(resvec1_1, 'b');
 title("B_1");
 xlabel("iteratiestappen");
+ylabel("residue")
 legend("zonder preconditionering", "met preconditionering");
 
 
 subplot(2, 1, 2);
 
-plot(resvec0_2, 'r');
+semilogy(resvec0_2, 'r');
 hold on;
-plot(resvec1_2, 'b');
+semilogy(resvec1_2, 'b');
 title("B_2")
 xlabel("iteratiestappen");
+ylabel("residu")
 legend("zonder preconditionering", "met preconditionering");
 
 %% Opdracht 16
