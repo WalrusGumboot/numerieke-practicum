@@ -90,9 +90,9 @@ for i = 0:12
     all_L2{i + 1} = L_2;
     all_U2{i + 1} = U_2;
 end
+save("decomposities.mat", "all_L1", "all_U1", "all_L2", "all_U2", "-v7.3")
 %}
 
-save("decomposities.mat", "all_L1", "all_U1", "all_L2", "all_U2", "-v7.3")
 load("decomposities.mat")
 
 runs = 20;
@@ -160,8 +160,19 @@ ylabel("tijdsduur (s)")
 xlabel("grootte van matrix")
 
 %% Opdracht 13
-[x0_1, x1_1, resvec0_1, resvec1_1] = laad_gmres_gegevens("matrix_B1.mat");
-[x0_2, x1_2, resvec0_2, resvec1_2] = laad_gmres_gegevens("matrix_B2.mat");
+fprintf("Resultaten voor matrix B1:\n");
+[
+    x0_1, x1_1, ...
+    resvec0_1, resvec1_1, ...
+    cond_voor_1, cond_na_1, ...
+] = laad_gmres_gegevens("matrix_B1.mat");
+fprintf("Resultaten voor matrix B2:\n");
+[
+    x0_2, x1_2, ...
+    resvec0_2, resvec1_2, ...
+    cond_voor_2, cond_na_2, ...
+] = laad_gmres_gegevens("matrix_B2.mat");
+
 
 figure(1);
 subplot(2, 1, 1);
@@ -171,8 +182,11 @@ hold on;
 semilogy(resvec1_1, 'b');
 title("B_1");
 xlabel("iteratiestappen");
-ylabel("residue")
-legend("zonder preconditionering", "met preconditionering");
+ylabel("residu")
+legend( ...
+    sprintf("zonder preconditionering (κ = %d)", cond_voor_1), ...
+    sprintf("met preconditionering (κ = %d)", cond_na_1) ...
+);
 
 
 subplot(2, 1, 2);
@@ -183,7 +197,10 @@ semilogy(resvec1_2, 'b');
 title("B_2")
 xlabel("iteratiestappen");
 ylabel("residu")
-legend("zonder preconditionering", "met preconditionering");
+legend( ...
+    sprintf("zonder preconditionering (κ = %d)", cond_voor_2), ...
+    sprintf("met preconditionering (κ = %d)", cond_na_2) ...
+);
 
 %% Opdracht 16
 

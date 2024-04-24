@@ -210,13 +210,11 @@ $ M_1 M_1^(-1) A M_2^(-1) (M_2 x) &= M_1 M_1^(-1) b \ <=> A x &= b $
 
 = Opdracht 13
 
-De preconditionering zal $B_1$ niet helpen convergeren in `gmres`, en $B_2$ wel. Uit de #link("https://nl.mathworks.com/help/matlab/ref/gmres.html#f84-998579_sep_mw_021450b1-4be9-4d57-b903-c4a2d800c810", [tips over `gmres`]) halen we de informatie dat het conditiegetal van de matrix sterk samenhangt met het convergentiegedrag in `gmres`.
+De preconditionering zal een impact hebben op het convergentiegedrag van $B_1$ in `gmres`, en niet op dat van $B_2$. Uit de #link("https://nl.mathworks.com/help/matlab/ref/gmres.html#f84-998579_sep_mw_021450b1-4be9-4d57-b903-c4a2d800c810", [tips over `gmres`]) halen we de informatie dat het conditiegetal van de matrix sterk samenhangt met het convergentiegedrag.
 
-Aangezien $B_1$ en $B_2$ in MATLAB als spaarse matrices opgeslagen zijn, gebruiken we `condest` om het conditiegetal te berekenen. Bovendien gebruiken we de $2$-norm. Voor $B_1$ geeft dit een waarde van `3.5481e+06`, voor $B_2$ verkrijgen we `135.9396`. Tja. De resultaten spreken voor zich, edelachtbare.
+Aangezien $B_1$ en $B_2$ in MATLAB als spaarse matrices opgeslagen zijn, gebruiken we `condest` om het conditiegetal te berekenen. Bovendien gebruiken we de $2$-norm. Voor $B_1$ geeft dit een waarde van $3.5481 dot 10^6$, voor $B_2$ verkrijgen we $135.9396$. Na het toepassen van de preconditionering (lees: het rechtsvermenigvuldigen met $M^-1$, waarbij $M = L U$) bemerken we dat $kappa(B_1) = 1.0003$, terwijl $kappa(B_2) = 55.1302$. Deze enorme vermindering voor $B_1$ maar relatief kleine daling voor $B_2$ is een verklaring voor de verbetering van het convergentiegedrag.
 
-Ook kunnen we de voorwaartse fout naar boven afschatten aan de hand van dezelfde formule die wij reeds uit paragraaf 5.5.3 haalden, namelijk dat $ (||Delta x||)/(||x||) <= kappa(A) (||r||)/(||b||). $  Zo bekomen we voor $B_1$ zonder preconditionering een bovengrens van $3.5481 dot 10^6 dot 51.2195/sqrt(600) approx 7.4193 dot 10^6$.
-Bemerk echter dat de incomplete LU-decompositie van $B_1$ nog steeds een conditiegetal van $3.5481 dot 10^6$ heeft.
-Wanneer we de incomplete LU-decompositie van $B_2$ echter bekijken heeft deze een conditiegetal van slechts 13.3248.
+Ook kunnen we de voorwaartse fout naar boven afschatten aan de hand van dezelfde formule die wij reeds uit paragraaf 5.5.3 haalden, namelijk dat $ (||Delta x||)/(||x||) <= kappa(A) (||r||)/(||b||). $  Zo bekomen we voor $B_1$ zonder preconditionering een bovengrens van $3.5481 dot 10^6 dot 51.2195/sqrt(600) approx 7.4193 dot 10^6$ en na preconditionering een bovengrens van $1.000345$. Voor $B_2$ bedragen deze waarden $3.979178 dot 10^2$ respectievelijk $1.095138 dot 10^2$.
 
 #figure(
   image("convergentie.svg"),
@@ -238,3 +236,17 @@ Gegeven dat $A_2 z = P b$, met $A_1 x = b$, kunnen we deze gelijkheid invullen o
 $ A_1^(-1) P^(-1) P A_1 Q z &= A_1^(-1) P^(-1) P A_1 x \ <=> Q z &= x $
 
 = Opdracht 16
+
+Weer merken we een kwadratisch-lineair onderscheid. Ook dit is te verwachten, aangezien we gebruik kunnen maken van spaarse matrices en hun lineaire uitvoeringstijden bij de PQ-methode, cfr. opdracht 9.
+
+#figure(
+  image("figuur3.svg")
+)
+
+= Opdracht 17
+De boosdoener is de deling. Wegens het feit dat we zonder pivotering werken, komt het voor dat we door het zeer kleine element $10^(-20)$ delen. Zoals we in de cursus kunnen lezen:
+
+#align(center, rect(inset: 1em, align(right, [#emph("\"Kleine spilelementen veroorzaken grote afrondingsfouten\"") \ pagina 94, hoofdstuk 5.5.1])))
+
+= Opdracht 18
+De oplossing voor dit probleem is het gebruiken van rijpivotering. We gebruiken daarvoor het feit dat we de rijen vrijelijk mogen verwisselen in een stelsel zonder dat de oplossing verandert. Als we dit bijhouden in een permutatiematrix $P$, kunnen we zowel in het linker- als het rechterlid vermenigvuldigen met $P$ om de gelijkheid te behouden. Dit kunnen we in ons voordeel laten werken door steeds een "tactisch" element op de spilpositie te plaatsen -- dat houdt in: we willen een element dat in absolute waarde zo groot mogelijk is, zodat de afrondingsfouten tot een minimum beperkt blijven. De keuze bij uitstek is dus $||a[i, n]||_oo$ waarbij $a$ de $i$-de kolom van $A$ is.
