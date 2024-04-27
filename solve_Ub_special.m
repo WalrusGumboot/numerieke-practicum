@@ -6,7 +6,7 @@ function y = solve_Ub_special(U, b)
 
 n = length(b);
 
-y = zeros(1, n);
+y = zeros(n, 1);
 
 y(n) = b(end)/U(end, end);
 delingsfactor = U(1, 1);

@@ -97,7 +97,7 @@ load("decomposities.mat")
 
 runs = 20;
 % oplossen van stelsels mbt A1
-
+%{
 tijden_A1 = zeros(1, 13);
 for i = 1:13
     L = all_L1{i};
@@ -128,7 +128,7 @@ ylabel("tijdsduur (s)")
 xlabel("grootte van matrix")
 
 hold on
-
+%}
 % oplossen van stelsels mbt A2
 
 tijden_A2 = zeros(1, 13);
