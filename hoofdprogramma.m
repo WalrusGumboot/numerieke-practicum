@@ -204,7 +204,7 @@ legend( ...
 %% Opdracht 16
 
 % Algemene LU-decompositie
-%{
+
 tijden_LU = zeros(1, 13);
 for i = 1:13
     L = all_L1{i};
@@ -225,7 +225,7 @@ for i = 1:13
 
     fprintf("run met n = %d duurde %d seconden\n", length(U), tijden_LU(i));
 end
-%}
+
 
 runs = 150;
 tijden_PQ = zeros(1, 13);
