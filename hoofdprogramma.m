@@ -68,6 +68,7 @@ fprintf('U_2 bevat %d nullen\n', sum(U_2(:) == 0));
 
 % genereren van de LU-decomposities
 
+%{
 all_L1 = cell(13, 1);
 all_U1 = cell(13, 1);
 all_L2 = cell(13, 1);
@@ -92,12 +93,15 @@ for i = 0:12
 end
 save("decomposities.mat", "all_L1", "all_U1", "all_L2", "all_U2", "-v7.3")
 
+%}
+
 load("decomposities.mat")
 
-runs = 20;
+runs = 150;
 % oplossen van stelsels mbt A1
 
 tijden_A1 = zeros(1, 13);
+
 for i = 1:13
     L = all_L1{i};
     U = all_U1{i};
@@ -121,7 +125,7 @@ end
 figure(1)
 subplot(2, 1, 1)
 
-plot((0:12)*500+1000, tijden_A1,'b')
+plot(1000:500:7000, tijden_A1,'b')
 title("Niet-spaarse variant") 
 ylabel("tijdsduur (s)")
 xlabel("grootte van matrix")
@@ -153,7 +157,7 @@ end
 
 subplot(2, 1, 2)
 
-plot((0:12)*500+1000, tijden_A2,'r')
+plot(1000:500:7000, tijden_A2,'r')
 title("Spaarse variant")
 ylabel("tijdsduur (s)")
 xlabel("grootte van matrix")

@@ -189,7 +189,7 @@ spaars te noemen.
 
 = Opdracht 8
 
-`solve_Ub_special` vereist $sum_(k = 1)^(n - 1) 3 = 3(n - 1)$ bewerkingen (één vermenigvuldiging, één aftrekking en één deling), 'solve_Lb_special' vereist $2(n - 1)$ (één aftrekking, n-1 vermenigvuldigingen, n-2 optellingen). In vergelijking met de implementatie uit opdracht 5 is dit verband lineair in plaats van kwadratisch.
+`solve_Ub_special` vereist $sum_(k = 1)^(n - 1) 3 = 3(n - 1)$ bewerkingen (één vermenigvuldiging, één aftrekking en één deling), `solve_Lb_special` vereist $2(n - 1)$ (één aftrekking, $n-1$ vermenigvuldigingen, $n-2$ optellingen). In vergelijking met de implementatie uit opdracht 5 is dit verband lineair in plaats van kwadratisch.
 
 = Opdracht 9
 
@@ -217,7 +217,7 @@ Aangezien $B_1$ en $B_2$ in MATLAB als spaarse matrices opgeslagen zijn, gebruik
 Ook kunnen we de voorwaartse fout naar boven afschatten aan de hand van dezelfde formule die wij reeds uit paragraaf 5.5.3 haalden, namelijk dat $ (||Delta x||)/(||x||) <= kappa(A) (||r||)/(||b||). $  Zo bekomen we voor $B_1$ zonder preconditionering een bovengrens van $3.5481 dot 10^6 dot 51.2195/sqrt(600) approx 7.4193 dot 10^6$ en na preconditionering een bovengrens van $1.000345$. Voor $B_2$ bedragen deze waarden $3.979178 dot 10^2$ respectievelijk $1.095138 dot 10^2$.
 
 #figure(
-  image("convergentie.svg"),
+  image("convergentie.svg", width: 80%),
   caption: [De convergentiesnelheden van $B_1$ en $B_2$ met en zonder preconditionering.]
 )
 
@@ -240,7 +240,7 @@ $ A_1^(-1) P^(-1) P A_1 Q z &= A_1^(-1) P^(-1) P A_1 x \ <=> Q z &= x $
 Weer merken we een kwadratisch-lineair onderscheid. Ook dit is te verwachten, aangezien we gebruik kunnen maken van spaarse matrices en hun lineaire uitvoeringstijden bij de PQ-methode, cfr. opdracht 9.
 
 #figure(
-  image("figuur3.svg")
+  image("pq-fac.svg")
 )
 
 = Opdracht 17
